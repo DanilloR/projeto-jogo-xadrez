@@ -8,7 +8,10 @@ public class JogoXadrez {
 		// TODO Auto-generated method stub
 		
 		PartidaXadrez partida = new PartidaXadrez();
+		//instancia uma nova partida
+		
 		UI.printBoard(partida.getPecas());
+		//imprime as peças da partida
 
 	}
 

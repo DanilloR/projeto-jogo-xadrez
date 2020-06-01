@@ -36,11 +36,19 @@ public class Tabuleiro {
 	
 	public Peca peca (int linha, int coluna) {
 		return pecas [linha][coluna];
+		//retorna a matriz peça, dada a linha e a coluna
 	}
 	
 	public Peca peca (Posicao posicao) {
 		return pecas [posicao.getLinhas()][posicao.getColunas()];
-	}
+	} //retorna a peça dada a sua posicao
 	
+	public void posicionaPeca(Peca peca, Posicao posicao) {
+		pecas[posicao.getLinhas()][posicao.getColunas()] = peca;
+		//recebe a peça como argumento e coloca na posicao 
+		//também recebida como argumento
+		peca.posicao = posicao;
+		//atribui a peça à posicao, que não está mais nula
+	}
 	
 }

@@ -14,6 +14,8 @@ public class PecaXadrez extends Peca {
 
 	public Cor getCor() {
 		return cor;
+		//a cor da peça não pode ser modificada,
+		//apenas acessada.
 	}
 	
 }
