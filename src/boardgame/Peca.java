@@ -16,5 +16,6 @@ public class Peca {
 		return tabuleiro; //acessado somente em Tabuleiro
 		//e subclasses de peças
 	}
+	
 
 }
