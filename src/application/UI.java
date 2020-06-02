@@ -32,6 +32,13 @@ public class UI {
 	public static final String ANSI_CYAN_BACKGROUND = "\u001B[46m";
 	public static final String ANSI_WHITE_BACKGROUND = "\u001B[47m";
 
+	//limpando a tela após as jogadas
+	public static void limpaTela() {
+		System.out.print("\033[H\033[2J");
+		System.out.flush();
+	}
+	
+	//lê a posicao informada pelo jogador
 	public static PosicaoXadrez lerPosicaoXadrez (Scanner sc) {
 		try {
 		String s = sc.nextLine();
@@ -40,8 +47,8 @@ public class UI {
 		return new PosicaoXadrez(coluna, linha);
 	  }
 		catch (RuntimeException e) {
-			throw new InputMismatchException("Erro ao ler posição. "
-					+ "Posições válidas de a1 a h8");
+			throw new InputMismatchException("Erro ao ler posicao. "
+					+ "Posicoes validas de a1 a h8");
 		}
 	}
 	

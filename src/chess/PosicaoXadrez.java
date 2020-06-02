@@ -12,7 +12,7 @@ public class PosicaoXadrez {
 		//lança a exceção caso as coordenadas estejam fora dos limites
 		//do tabuleiro
 		if (coluna < 'a' || coluna > 'h' || linha < 1 || linha > 8) {
-			throw new XadrezExcecao("Erro ao instanciar a posição. Valores válidos: a1 a h8");
+			throw new XadrezExcecao("Erro ao instanciar a posicao. Valores validos: a1 a h8");
 		}
 		this.coluna = coluna;
 		this.linha = linha;

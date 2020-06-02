@@ -28,7 +28,7 @@ public class Tabuleiro {
 
 	public Peca peca (int linha, int coluna) {
 		if (!existePosicao(linha, coluna)) {
-			throw new BoardException("Posição não existe no tabuleiro");
+			throw new BoardException("Posicao nao existe no tabuleiro");
 		}
 		return pecas [linha][coluna];
 		//retorna a matriz peça, dada a linha e a coluna
