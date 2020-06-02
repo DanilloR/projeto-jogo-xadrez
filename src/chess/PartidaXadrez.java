@@ -1,6 +1,5 @@
 package chess;
 
-import boardgame.Posicao;
 import boardgame.Tabuleiro;
 import chess.pieces.Rei;
 import chess.pieces.Torre;
@@ -34,12 +33,23 @@ public class PartidaXadrez {
 		return mat;
 	}
 	
-	private void iniciaPartida() {
+	//metodo que recebe as coordenadas do xadrez
+	private void alocaNovaPeca(char coluna, int linha, PecaXadrez peca) {
+		tabuleiro.posicionaPeca(peca, new PosicaoXadrez(coluna, linha).toPosicao());
+	}
+	
+	/*private void iniciaPartida() {
 		//inicia a partida, colocando as peças no tabuleiro;
 		tabuleiro.posicionaPeca(new Torre(tabuleiro, Cor.WHITE), new Posicao(2,1));
 		//ainda é uma posição comum de matriz
 		tabuleiro.posicionaPeca(new Rei(tabuleiro,Cor.BLACK), new Posicao(0,4));
 		tabuleiro.posicionaPeca(new Rei(tabuleiro, Cor.WHITE), new Posicao(7,4));
+	}*/
+	
+	private void iniciaPartida() {
+		alocaNovaPeca('b', 6, new Torre(tabuleiro, Cor.WHITE));
+		alocaNovaPeca('e', 8, new Rei(tabuleiro, Cor.BLACK));
+		alocaNovaPeca('e', 1, new Rei(tabuleiro, Cor.WHITE));
 	}
 
 }
