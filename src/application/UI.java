@@ -1,7 +1,11 @@
 package application;
 
+import java.util.InputMismatchException;
+import java.util.Scanner;
+
 import chess.Cor;
 import chess.PecaXadrez;
+import chess.PosicaoXadrez;
 
 //UI = User Interface
 public class UI {
@@ -28,6 +32,19 @@ public class UI {
 	public static final String ANSI_CYAN_BACKGROUND = "\u001B[46m";
 	public static final String ANSI_WHITE_BACKGROUND = "\u001B[47m";
 
+	public static PosicaoXadrez lerPosicaoXadrez (Scanner sc) {
+		try {
+		String s = sc.nextLine();
+		char coluna = s.charAt(0);
+		int linha = Integer.parseInt(s.substring(1));
+		return new PosicaoXadrez(coluna, linha);
+	  }
+		catch (RuntimeException e) {
+			throw new InputMismatchException("Erro ao ler posição. "
+					+ "Posições válidas de a1 a h8");
+		}
+	}
+	
 	// classe que imprime o tabuleiro
 	// método estático, realiza apenas essa função
 	// método que imprime o tabuleiro completo, com todas as peças alocadas

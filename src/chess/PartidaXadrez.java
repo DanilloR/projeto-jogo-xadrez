@@ -1,5 +1,7 @@
 package chess;
 
+import boardgame.Peca;
+import boardgame.Posicao;
 import boardgame.Tabuleiro;
 import chess.pieces.Rei;
 import chess.pieces.Torre;
@@ -31,6 +33,29 @@ public class PartidaXadrez {
 			}
 		}
 		return mat;
+	}
+	
+	
+	public PecaXadrez executaJogada (PosicaoXadrez posicaoOrigem, PosicaoXadrez posicaoDestino) {
+		Posicao origem = posicaoOrigem.toPosicao();
+		Posicao destino = posicaoDestino.toPosicao();
+		validaPosicaoOrigem(origem);
+		Peca pecaCapturada = movePeca(origem, destino);
+		return (PecaXadrez) pecaCapturada;
+	}
+	
+	private Peca movePeca (Posicao origem, Posicao destino) {
+		Peca p = tabuleiro.removePeca(origem);
+		Peca pecaCapturada = tabuleiro.removePeca(destino);
+		tabuleiro.posicionaPeca(p, destino);
+		return pecaCapturada;
+	}
+	
+	//validação da posição de origem
+	private void validaPosicaoOrigem (Posicao posicao) {
+		if (!tabuleiro.temUmaPeca(posicao)) {
+			throw new XadrezExcecao("Nao ha uma peca na posicao de origem!");
+		}
 	}
 	
 	//metodo que recebe as coordenadas do xadrez
