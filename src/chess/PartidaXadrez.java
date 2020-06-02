@@ -47,9 +47,21 @@ public class PartidaXadrez {
 	}*/
 	
 	private void iniciaPartida() {
-		alocaNovaPeca('b', 6, new Torre(tabuleiro, Cor.WHITE));
-		alocaNovaPeca('e', 8, new Rei(tabuleiro, Cor.BLACK));
-		alocaNovaPeca('e', 1, new Rei(tabuleiro, Cor.WHITE));
+		
+		//alocando peças de cor branca
+		alocaNovaPeca('c', 1, new Torre(tabuleiro, Cor.WHITE));
+		alocaNovaPeca('c', 2, new Torre(tabuleiro, Cor.WHITE));
+		alocaNovaPeca('d', 2, new Torre(tabuleiro, Cor.WHITE));
+		alocaNovaPeca('e', 2, new Torre(tabuleiro, Cor.WHITE));
+		alocaNovaPeca('e', 1, new Torre(tabuleiro, Cor.WHITE));
+		alocaNovaPeca('d', 1, new Rei(tabuleiro, Cor.WHITE));
+
+		alocaNovaPeca('c', 7, new Torre(tabuleiro, Cor.BLACK));
+		alocaNovaPeca('c', 8, new Torre(tabuleiro, Cor.BLACK));
+		alocaNovaPeca('d', 7, new Torre(tabuleiro, Cor.BLACK));
+		alocaNovaPeca('e', 7, new Torre(tabuleiro, Cor.BLACK));
+		alocaNovaPeca('e', 8, new Torre(tabuleiro, Cor.BLACK));
+        alocaNovaPeca('d', 8, new Rei(tabuleiro, Cor.BLACK));
 	}
 
 }
