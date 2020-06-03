@@ -39,6 +39,11 @@ public class Posicao {
 				+colunas;
 	}
 	
+	public void setValues(int linha, int coluna) {
+		this.linhas = linha;
+		this.colunas = coluna;
+	}
+	
 	
 
 }
