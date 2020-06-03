@@ -10,14 +10,25 @@ public class PartidaXadrez {
 	
 	//Classe que possui as regras do jogo
 	
-	
+	private int turno;
+	private Cor jogadorAtual;
 	public Tabuleiro tabuleiro;
 	//a partida tem que ter um tabuleiro
 	
 	public PartidaXadrez () {
 		tabuleiro = new Tabuleiro (8,8);
+		turno = 1;
+		jogadorAtual = Cor.WHITE;
 		iniciaPartida();
 		//estabelece as dimensões do tabuleiro
+	}
+	
+	public int getTurno() {
+		return turno;
+	}
+	
+	public Cor getJogadorAtual() {
+		return jogadorAtual;
 	}
 	
 	public PecaXadrez [][] getPecas() { //método que retorna matriz de peças
@@ -49,6 +60,7 @@ public class PartidaXadrez {
 		validaPosicaoOrigem(origem);
 		validaPosicaoDestino(origem, destino);
 		Peca pecaCapturada = movePeca(origem, destino);
+		proximoTurno();
 		return (PecaXadrez) pecaCapturada;
 	}
 	
@@ -63,6 +75,9 @@ public class PartidaXadrez {
 	private void validaPosicaoOrigem (Posicao posicao) {
 		if (!tabuleiro.temUmaPeca(posicao)) {
 			throw new XadrezExcecao("Nao ha uma peca na posicao de origem!");
+		}
+		if (jogadorAtual != ((PecaXadrez)tabuleiro.peca(posicao)).getCor()) {
+			throw new XadrezExcecao("A peca escolhida nao e sua!");
 		}
 		if (!tabuleiro.peca(posicao).haAlgumMovimentoPossivel()) {
 			throw new XadrezExcecao("Nao existem movimentos "
@@ -82,6 +97,12 @@ public class PartidaXadrez {
 	//metodo que recebe as coordenadas do xadrez
 	private void alocaNovaPeca(char coluna, int linha, PecaXadrez peca) {
 		tabuleiro.posicionaPeca(peca, new PosicaoXadrez(coluna, linha).toPosicao());
+	}
+	
+	private void proximoTurno () {
+		turno ++;
+		jogadorAtual = (jogadorAtual==Cor.WHITE) ?
+				Cor.BLACK:Cor.WHITE;
 	}
 	
 	/*private void iniciaPartida() {

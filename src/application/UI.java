@@ -4,6 +4,7 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 
 import chess.Cor;
+import chess.PartidaXadrez;
 import chess.PecaXadrez;
 import chess.PosicaoXadrez;
 
@@ -50,6 +51,14 @@ public class UI {
 			throw new InputMismatchException("Erro ao ler posicao. "
 					+ "Posicoes validas de a1 a h8");
 		}
+	}
+	
+	//imprime a partida
+	public static void imprimePartida (PartidaXadrez partidaXadrez) {
+		printBoard(partidaXadrez.getPecas());
+		System.out.println();
+		System.out.println("Turno: "+partidaXadrez.getTurno());
+		System.out.println("Esperando o jogador "+partidaXadrez.getJogadorAtual());
 	}
 	
 	// classe que imprime o tabuleiro

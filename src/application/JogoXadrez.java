@@ -20,7 +20,7 @@ public class JogoXadrez {
 		while (true) {
 			try {
 				UI.limpaTela();
-				UI.printBoard(partida.getPecas());
+				UI.imprimePartida(partida);
 				//imprime as peças da partida
 				System.out.println();
 				System.out.print("Origem: ");
