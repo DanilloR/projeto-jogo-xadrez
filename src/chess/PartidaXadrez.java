@@ -35,6 +35,13 @@ public class PartidaXadrez {
 		return mat;
 	}
 	
+	//mostra as possíveis jogadas
+	public boolean [][] movimentosPossiveis (PosicaoXadrez posicaoOrigem){
+		Posicao posicao = posicaoOrigem.toPosicao();
+		validaPosicaoOrigem(posicao);
+		return tabuleiro.peca(posicao).movimentosPossiveis();
+	}
+	
 	
 	public PecaXadrez executaJogada (PosicaoXadrez posicaoOrigem, PosicaoXadrez posicaoDestino) {
 		Posicao origem = posicaoOrigem.toPosicao();

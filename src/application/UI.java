@@ -59,7 +59,7 @@ public class UI {
 		for (int i = 0; i < pecas.length; i++) {
 			System.out.print((8 - i) + " ");
 			for (int j = 0; j < pecas.length; j++) {
-				imprimePeca(pecas[i][j]);
+				imprimePeca(pecas[i][j], false);
 			}
 			System.out.println();
 			// quebra de linha, para a próxima posicao do tabuleiro
@@ -67,8 +67,20 @@ public class UI {
 		System.out.println("  a b c d e f g h");
 	}
 
+	//imprimindo o tabuleiro colorindo as possíveis jogadas da peça
+	public static void printBoard(PecaXadrez[][] pecas, boolean [][] movimentosPossiveis) {
+		for (int i = 0; i < pecas.length; i++) {
+			System.out.print((8 - i) + " ");
+			for (int j = 0; j < pecas.length; j++) {
+				imprimePeca(pecas[i][j], movimentosPossiveis[i][j]);
+			}
+			System.out.println();
+			// quebra de linha, para a próxima posicao do tabuleiro
+		}
+		System.out.println("  a b c d e f g h");
+	}
 	// método que imprime cada peça individualmente
-	public static void imprimePeca(PecaXadrez peca) {		
+	public static void imprimePeca(PecaXadrez peca, boolean fundoDaPeca) {		
 		/*if (peca == null) {
 			System.out.print("-");
 		} else {
@@ -76,8 +88,11 @@ public class UI {
 		}
 		System.out.print(" ");
 	}*/
+		if (fundoDaPeca) {
+			System.out.print(ANSI_BLUE_BACKGROUND);
+		}
 		if (peca == null) {
-			System.out.print("-");
+			System.out.print("-"+ ANSI_RESET);
 		}
 		else {
 			if (peca.getCor() == Cor.WHITE) {
