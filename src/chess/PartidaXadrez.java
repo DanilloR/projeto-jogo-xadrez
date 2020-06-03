@@ -1,5 +1,8 @@
 package chess;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import boardgame.Peca;
 import boardgame.Posicao;
 import boardgame.Tabuleiro;
@@ -14,6 +17,9 @@ public class PartidaXadrez {
 	private Cor jogadorAtual;
 	public Tabuleiro tabuleiro;
 	//a partida tem que ter um tabuleiro
+	
+	private List<Peca> pecasNoTabuleiro = new ArrayList<>();
+	private List<Peca> pecasCapturadas = new ArrayList<>();
 	
 	public PartidaXadrez () {
 		tabuleiro = new Tabuleiro (8,8);
@@ -68,6 +74,11 @@ public class PartidaXadrez {
 		Peca p = tabuleiro.removePeca(origem);
 		Peca pecaCapturada = tabuleiro.removePeca(destino);
 		tabuleiro.posicionaPeca(p, destino);
+		
+		if (pecaCapturada!= null) {
+			pecasNoTabuleiro.remove(pecaCapturada);
+			pecasCapturadas.add(pecaCapturada);
+		}
 		return pecaCapturada;
 	}
 	
@@ -97,6 +108,7 @@ public class PartidaXadrez {
 	//metodo que recebe as coordenadas do xadrez
 	private void alocaNovaPeca(char coluna, int linha, PecaXadrez peca) {
 		tabuleiro.posicionaPeca(peca, new PosicaoXadrez(coluna, linha).toPosicao());
+		pecasNoTabuleiro.add(peca);
 	}
 	
 	private void proximoTurno () {
