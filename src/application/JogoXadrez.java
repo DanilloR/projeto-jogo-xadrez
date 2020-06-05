@@ -20,7 +20,7 @@ public class JogoXadrez {
 		List<PecaXadrez> capturadas = new ArrayList<>();
 		//instancia uma nova partida
 		
-		while (true) {
+		while (!partida.getXequeMate()) {
 			try {
 				UI.limpaTela();
 				UI.imprimePartida(partida, capturadas);
@@ -52,6 +52,8 @@ public class JogoXadrez {
 				sc.nextLine();
 			}
 	}
-	}
+		UI.limpaTela();
+		UI.imprimePartida(partida, capturadas);
+  }
 
 }

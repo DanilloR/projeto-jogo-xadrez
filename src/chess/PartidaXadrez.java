@@ -19,6 +19,7 @@ public class PartidaXadrez {
 	public Tabuleiro tabuleiro;
 	//a partida tem que ter um tabuleiro
 	private boolean xeque;
+	private boolean xequeMate;
 	
 	private List<Peca> pecasNoTabuleiro = new ArrayList<>();
 	private List<Peca> pecasCapturadas = new ArrayList<>();
@@ -41,6 +42,10 @@ public class PartidaXadrez {
 	
 	public boolean getXeque () {
 		return xeque;
+	}
+	
+	public boolean getXequeMate() {
+		return xequeMate;
 	}
 	
 	public PecaXadrez [][] getPecas() { //método que retorna matriz de peças
@@ -80,7 +85,14 @@ public class PartidaXadrez {
 		
 		xeque = (testaXeque(oponente(jogadorAtual)))?true:false;
 		
-		proximoTurno();
+		if (testaXequeMate(oponente(jogadorAtual))) {
+			xequeMate = true;
+		}
+		else {
+			proximoTurno();
+		}
+		
+		
 		return (PecaXadrez) pecaCapturada;
 	}
 	
@@ -160,6 +172,50 @@ public class PartidaXadrez {
 		return false;
 	}
 	
+	
+	//método que verifica se está em xeque mate
+	private boolean testaXequeMate(Cor cor) {
+		
+		//se a cor não estiver em xeque, não está em xeque mate
+		if (!testaXeque(cor)) {
+			return false;
+		}
+		
+		//captura as peças da cor e armazena em uma lista
+		List<Peca> list = pecasNoTabuleiro.stream().filter(x->((PecaXadrez)x).getCor()==cor).collect(Collectors.toList());
+		
+		//percorre as peças que estão na lista
+		for (Peca p:list) {
+			
+			boolean [][] mat = p.movimentosPossiveis();
+			//procura os possíveis movimentos para sair do xeque
+			for (int i=0;i<tabuleiro.getLinhas();i++) {
+				for (int j=0;j<tabuleiro.getColunas();j++) {
+					//a posicao é um movimento possível? ela tira do xeque?
+					if (mat[i][j]) {
+						//peça a posicão atual da peça
+						Posicao origem = ((PecaXadrez)p).getPosicaoXadrez().toPosicao();
+						Posicao destino = new Posicao (i,j);
+						//se houver movimento possível, faz o movimento para a posicao destino
+						//definida pela matriz
+						Peca pecaCapturada = movePeca(origem, destino);
+						//faz o teste que verifica se o rei ainda está em xeque
+						boolean testeXeque = testaXeque(cor);
+						//desfaz o movimento de teste
+						desfazMovimento(origem, destino, pecaCapturada);
+						//se não está mais em xeque, retorna false
+						if (!testeXeque) {
+							return false;
+						}
+						
+					}
+				}
+			}
+		}
+		
+		return true;
+	}
+	
 	//metodo que recebe as coordenadas do xadrez
 	private void alocaNovaPeca(char coluna, int linha, PecaXadrez peca) {
 		tabuleiro.posicionaPeca(peca, new PosicaoXadrez(coluna, linha).toPosicao());
@@ -183,19 +239,12 @@ public class PartidaXadrez {
 	private void iniciaPartida() {
 		
 		//alocando peças de cor branca
-		alocaNovaPeca('c', 1, new Torre(tabuleiro, Cor.WHITE));
-		alocaNovaPeca('c', 2, new Torre(tabuleiro, Cor.WHITE));
-		alocaNovaPeca('d', 2, new Torre(tabuleiro, Cor.WHITE));
-		alocaNovaPeca('e', 2, new Torre(tabuleiro, Cor.WHITE));
-		alocaNovaPeca('e', 1, new Torre(tabuleiro, Cor.WHITE));
-		alocaNovaPeca('d', 1, new Rei(tabuleiro, Cor.WHITE));
+		alocaNovaPeca('h', 7, new Torre(tabuleiro, Cor.WHITE));
+		alocaNovaPeca('d', 1, new Torre(tabuleiro, Cor.WHITE));
+		alocaNovaPeca('e', 1, new Rei(tabuleiro, Cor.WHITE));
 
-		alocaNovaPeca('c', 7, new Torre(tabuleiro, Cor.BLACK));
-		alocaNovaPeca('c', 8, new Torre(tabuleiro, Cor.BLACK));
-		alocaNovaPeca('d', 7, new Torre(tabuleiro, Cor.BLACK));
-		alocaNovaPeca('e', 7, new Torre(tabuleiro, Cor.BLACK));
-		alocaNovaPeca('e', 8, new Torre(tabuleiro, Cor.BLACK));
-        alocaNovaPeca('d', 8, new Rei(tabuleiro, Cor.BLACK));
+		alocaNovaPeca('b', 8, new Torre(tabuleiro, Cor.BLACK));
+        alocaNovaPeca('a', 8, new Rei(tabuleiro, Cor.BLACK));
 	}
 
 }
