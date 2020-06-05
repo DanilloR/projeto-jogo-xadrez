@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 import boardgame.Peca;
 import boardgame.Posicao;
 import boardgame.Tabuleiro;
+import chess.pieces.Peao;
 import chess.pieces.Rei;
 import chess.pieces.Torre;
 
@@ -241,12 +242,31 @@ public class PartidaXadrez {
 	private void iniciaPartida() {
 		
 		//alocando peças de cor branca
-		alocaNovaPeca('h', 7, new Torre(tabuleiro, Cor.WHITE));
-		alocaNovaPeca('d', 1, new Torre(tabuleiro, Cor.WHITE));
+		alocaNovaPeca('a', 1, new Torre(tabuleiro, Cor.WHITE));
 		alocaNovaPeca('e', 1, new Rei(tabuleiro, Cor.WHITE));
+		alocaNovaPeca('h', 1, new Torre(tabuleiro, Cor.WHITE));
+		alocaNovaPeca('a', 2, new Peao(tabuleiro, Cor.WHITE));
+		alocaNovaPeca('b', 2, new Peao(tabuleiro, Cor.WHITE));
+		alocaNovaPeca('c', 2, new Peao(tabuleiro, Cor.WHITE));
+		alocaNovaPeca('d', 2, new Peao(tabuleiro, Cor.WHITE));
+		alocaNovaPeca('e', 2, new Peao(tabuleiro, Cor.WHITE));
+		alocaNovaPeca('f', 2, new Peao(tabuleiro, Cor.WHITE));
+		alocaNovaPeca('g', 2, new Peao(tabuleiro, Cor.WHITE));
+		alocaNovaPeca('h', 2, new Peao(tabuleiro, Cor.WHITE));
+		
+		
 
-		alocaNovaPeca('b', 8, new Torre(tabuleiro, Cor.BLACK));
-        alocaNovaPeca('a', 8, new Rei(tabuleiro, Cor.BLACK));
+		alocaNovaPeca('a', 8, new Torre(tabuleiro, Cor.BLACK));
+        alocaNovaPeca('e', 8, new Rei(tabuleiro, Cor.BLACK));
+        alocaNovaPeca('h', 8, new Torre(tabuleiro, Cor.BLACK));
+        alocaNovaPeca('a', 7, new Peao(tabuleiro, Cor.BLACK));
+        alocaNovaPeca('b', 7, new Peao(tabuleiro, Cor.BLACK));
+        alocaNovaPeca('c', 7, new Peao(tabuleiro, Cor.BLACK));
+        alocaNovaPeca('d', 7, new Peao(tabuleiro, Cor.BLACK));
+        alocaNovaPeca('e', 7, new Peao(tabuleiro, Cor.BLACK));
+        alocaNovaPeca('f', 7, new Peao(tabuleiro, Cor.BLACK));
+        alocaNovaPeca('g', 7, new Peao(tabuleiro, Cor.BLACK));
+        alocaNovaPeca('h', 7, new Peao(tabuleiro, Cor.BLACK));
 	}
 
 }
