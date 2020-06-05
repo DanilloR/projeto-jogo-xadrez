@@ -10,6 +10,7 @@ import boardgame.Tabuleiro;
 import chess.pieces.Bispo;
 import chess.pieces.Cavalo;
 import chess.pieces.Peao;
+import chess.pieces.Rainha;
 import chess.pieces.Rei;
 import chess.pieces.Torre;
 
@@ -247,6 +248,7 @@ public class PartidaXadrez {
 		alocaNovaPeca('a', 1, new Torre(tabuleiro, Cor.WHITE));
 		alocaNovaPeca('b', 1, new Cavalo(tabuleiro, Cor.WHITE));
 		alocaNovaPeca('c', 1, new Bispo(tabuleiro, Cor.WHITE));
+		alocaNovaPeca('d', 1, new Rainha(tabuleiro, Cor.WHITE));
 		alocaNovaPeca('e', 1, new Rei(tabuleiro, Cor.WHITE));
 		alocaNovaPeca('f', 1, new Bispo(tabuleiro, Cor.WHITE));
 		alocaNovaPeca('g', 1, new Cavalo(tabuleiro, Cor.WHITE));
@@ -265,7 +267,8 @@ public class PartidaXadrez {
 		alocaNovaPeca('a', 8, new Torre(tabuleiro, Cor.BLACK));
 		alocaNovaPeca('b', 8, new Cavalo(tabuleiro, Cor.BLACK));
 		alocaNovaPeca('c', 8, new Bispo(tabuleiro, Cor.BLACK));
-        alocaNovaPeca('e', 8, new Rei(tabuleiro, Cor.BLACK));
+		alocaNovaPeca('d', 8, new Bispo(tabuleiro, Cor.BLACK));
+		alocaNovaPeca('e', 8, new Rei(tabuleiro, Cor.BLACK));
         alocaNovaPeca('f', 8, new Bispo(tabuleiro, Cor.BLACK));
         alocaNovaPeca('g', 8, new Cavalo(tabuleiro, Cor.BLACK));
         alocaNovaPeca('h', 8, new Torre(tabuleiro, Cor.BLACK));
