@@ -41,6 +41,13 @@ public class JogoXadrez {
 				if (pecaCapturada != null) {
 					capturadas.add(pecaCapturada);
 				}
+				
+				if (partida.getPromocao()!=null) {
+					System.out.print("Informe a peca para promocao "+
+							"(B/N/R/Q): ");
+					String tipo = sc.nextLine();
+					partida.trocaPecaPromovida(tipo);
+				}
 		}
 			catch (XadrezExcecao e) {
 				System.out.println(e.getMessage());

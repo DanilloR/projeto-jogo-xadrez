@@ -1,5 +1,6 @@
 package chess;
 
+import java.security.InvalidParameterException;
 //import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
@@ -26,6 +27,7 @@ public class PartidaXadrez {
 	private boolean xeque;
 	private boolean xequeMate;
 	private PecaXadrez enPassant;
+	private PecaXadrez promocao;
 
 	private List<Peca> pecasNoTabuleiro = new ArrayList<>();
 	private List<Peca> pecasCapturadas = new ArrayList<>();
@@ -57,6 +59,10 @@ public class PartidaXadrez {
 	public PecaXadrez getEnPassant() {
 		return enPassant;
 	}
+	
+	public PecaXadrez getPromocao () {
+		return promocao;
+	}
 
 	public PecaXadrez[][] getPecas() { // método que retorna matriz de peças
 		// o programa enxerga apenas a camada de xadrez, não a de tabuleiro
@@ -87,14 +93,25 @@ public class PartidaXadrez {
 		validaPosicaoOrigem(origem);
 		validaPosicaoDestino(origem, destino);
 		Peca pecaCapturada = movePeca(origem, destino);
+		
+		PecaXadrez pecaMovida = (PecaXadrez) tabuleiro.peca(destino);
+		
+		//Jogada especial de promoção	
+		promocao = null;
+		if (pecaMovida instanceof Peao) {
+			if ((pecaMovida.getCor()==Cor.WHITE && destino.getLinhas()==0)
+					|| pecaMovida.getCor()==Cor.BLACK && destino.getLinhas()==7) {
+				promocao = (PecaXadrez)tabuleiro.peca(destino);
+				promocao = trocaPecaPromovida("Q");
+			}
+		}
 
 		if (testaXeque(jogadorAtual)) {
 			desfazMovimento(origem, destino, pecaCapturada);
 			throw new XadrezExcecao("Voce nao pode se colocar em xeque");
 		}
 
-		PecaXadrez pecaMovida = (PecaXadrez) tabuleiro.peca(destino);
-
+		
 		xeque = (testaXeque(oponente(jogadorAtual))) ? true : false;
 
 		if (testaXequeMate(oponente(jogadorAtual))) {
@@ -111,8 +128,35 @@ public class PartidaXadrez {
 		} else {
 			enPassant = null;
 		}
-
+		
 		return (PecaXadrez) pecaCapturada;
+	}
+	
+	public PecaXadrez trocaPecaPromovida (String tipo) {
+		if (promocao == null) {
+			throw new IllegalStateException("Nao ha peca para ser promovida");
+		}
+		if (!tipo.equals("B") && !tipo.equals("C")
+				&& !tipo.equals("T") && !tipo.equals("Q")) {
+			throw new InvalidParameterException("Tipo invalido para promocao");
+		}
+		
+		Posicao pos = promocao.getPosicaoXadrez().toPosicao();
+		Peca p = tabuleiro.removePeca(pos);
+		pecasNoTabuleiro.remove(p);
+		
+		PecaXadrez novaPeca = pecaNova(tipo, promocao.getCor());
+		tabuleiro.posicionaPeca(novaPeca, pos);
+		pecasNoTabuleiro.add(novaPeca);
+		
+		return novaPeca;		
+	}
+	
+	private PecaXadrez pecaNova (String tipo, Cor cor) {
+		if (tipo.equals("B")) return new Bispo(tabuleiro, cor);
+		if (tipo.equals("C")) return new Cavalo(tabuleiro, cor);
+		if (tipo.equals("Q")) return new Rainha(tabuleiro, cor);
+		return new Torre(tabuleiro, cor);
 	}
 
 	private Peca movePeca(Posicao origem, Posicao destino) {
