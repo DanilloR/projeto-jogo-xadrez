@@ -1,6 +1,6 @@
 package chess;
 
-import java.security.InvalidParameterException;
+//import java.security.InvalidParameterException;
 //import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
@@ -138,7 +138,7 @@ public class PartidaXadrez {
 		}
 		if (!tipo.equals("B") && !tipo.equals("C")
 				&& !tipo.equals("T") && !tipo.equals("Q")) {
-			throw new InvalidParameterException("Tipo invalido para promocao");
+			return promocao;
 		}
 		
 		Posicao pos = promocao.getPosicaoXadrez().toPosicao();
